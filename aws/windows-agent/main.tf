@@ -1,5 +1,5 @@
 locals {
-  cluster_name="development"
+  cluster_name="developmentC1"
   num_masters                  = "1"
   num_private_agents           = "1"
   num_public_agents            = "1"
@@ -10,11 +10,11 @@ locals {
   masters_instance_type        = "r5.xlarge"
   private_agents_instance_type = "r5.large"
   public_agents_instance_type  = "r5.large"
-  ssh_public_key_file          = "~/.ssh/id_rsa.pub"
-  ssh_private_key_file         = "~/.ssh/id_rsa"
+  ssh_public_key_file          = "~/.ssh/ep3.pub"
+  ssh_private_key_file         = "~/.ssh/ep3"
   admin_ips                    = ["${data.http.whatismyip.body}/32", "85.223.209.0/24", "87.245.220.0/26", "85.223.141.72/29", "89.162.139.0/27", "91.120.48.0/24", "80.92.226.132/30", "195.56.119.208/28", "195.56.109.192/28", "109.86.106.122/32"]
-  owner                        = "kostiantyn oleksiienko"
-  expiration                   = "John Doe"
+  owner                        = "John Dow"
+  expiration                   = "20h"
 }
 
 provider "aws" {
@@ -59,7 +59,7 @@ module "dcos" {
 }
 
 module "windows-agent" {
-  source = "git::https://github.com/alekspv/terraform-aws-windows-instance.git?ref=features/windows-agent"
+  source = "git::https://github.com/alekspv/terraform-aws-windows-instance.git?ref=support/0.2.x"
   num_winagent = "${local.num_winagent}"
   admin_ips = "${local.admin_ips}"
   vpc_id = "${module.dcos.infrastructure.vpc.id}"
